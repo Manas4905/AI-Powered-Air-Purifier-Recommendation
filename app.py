@@ -41,7 +41,7 @@ def get_ai_recommendation(prompt: str) -> str:
 # Set page configuration for a wider layout
 st.set_page_config(layout="wide")
 
-st.title("🇮🇳 AQI Analysis and Air Purifier Recommendation Dashboard")
+st.title("AI Powered Air-Purifier Recommendation System")
 
 # --- Data Loading and Cleaning (Caching for performance) ---
 @st.cache_data
