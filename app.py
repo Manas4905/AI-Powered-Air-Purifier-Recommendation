@@ -7,89 +7,6 @@ import json
 import time
 import requests
 import os
-from streamlit_extras.metric_cards import style_metric_cards
-from streamlit_extras.stylable_container import stylable_container
-# --- Custom CSS for UI/UX improvements ---
-st.markdown("""
-    <style>
-        /* Make the sidebar wider and style it */
-        [data-testid="stSidebar"] {
-            background-color: #f7f7fa;
-            min-width: 320px;
-        }
-        /* Style the main title */
-        .st-emotion-cache-10trblm {
-            font-size: 2.5rem !important;
-            color: #1a237e;
-            font-weight: 700;
-        }
-        /* Section headers */
-        .st-emotion-cache-1v0mbdj h2 {
-            color: #283593;
-            margin-top: 1.5em;
-        }
-        /* Buttons */
-        .st-emotion-cache-19rxjzo button {
-            background: linear-gradient(90deg, #1976d2 0%, #64b5f6 100%);
-            color: white;
-            border-radius: 8px;
-            font-weight: 600;
-            border: none;
-        }
-        /* Metric cards */
-        div[data-testid="metric-container"] {
-            background: #e3f2fd;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 8px;
-            box-shadow: 0 2px 8px rgba(25, 118, 210, 0.08);
-        }
-        /* Plotly/Altair chart containers */
-        .element-container:has(.js-plotly-plot), .element-container:has(.vega-embed) {
-            background: #f5faff;
-            border-radius: 12px;
-            padding: 16px;
-            margin-bottom: 16px;
-        }
-        /* Radio button group */
-        .st-emotion-cache-1wmy9hl {
-            background: #e3f2fd;
-            border-radius: 8px;
-            padding: 8px 16px;
-        }
-    </style>
-""", unsafe_allow_html=True)
-
-# --- Add a logo and subtitle ---
-with stylable_container(
-    key="header_container",
-    css_styles="""
-        background: linear-gradient(90deg, #e3f2fd 0%, #fff 100%);
-        border-radius: 16px;
-        padding: 1.5rem 2rem 1rem 2rem;
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 1.5rem;
-    """,
-):
-    st.image("https://img.icons8.com/color/96/air-quality.png", width=64)
-    st.markdown("""
-        <div>
-            <h1 style="margin-bottom:0;">🇮🇳 AQI Analysis & Air Purifier Recommendation</h1>
-            <p style="color:#1976d2;font-size:1.1rem;margin-top:0.2em;">
-                Visualize India's air quality and get AI-powered purifier advice for your region.
-            </p>
-        </div>
-    """, unsafe_allow_html=True)
-
-# --- Style metric cards globally ---
-style_metric_cards(
-    background="#e3f2fd",
-    border_left_color="#1976d2",
-    border_radius_px=12,
-    box_shadow=True
-)
 
 # Read Gemini API key from Streamlit secrets
 GEMINI_API_KEY = st.secrets.get("GEMINI_API_KEY", None)
@@ -124,7 +41,7 @@ def get_ai_recommendation(prompt: str) -> str:
 # Set page configuration for a wider layout
 st.set_page_config(layout="wide")
 
-st.title("AI Powered Air-Purifier Recommendation System")
+st.title("🇮🇳 AQI Analysis and Air Purifier Recommendation Dashboard")
 
 # --- Data Loading and Cleaning (Caching for performance) ---
 @st.cache_data
@@ -134,7 +51,7 @@ def load_data():
     Caches the result to avoid reloading on every rerun.
     """
     # Replace this URL with the raw file URL from your Hugging Face dataset
-    DATA_URL = "https://huggingface.co/datasets/manaspateltech/AQI/resolve/main/aqi.csv"
+    DATA_URL = "https://huggingface.co/datasets/your_username/indian-aqi-data/raw/main/aqi.csv"
     
     try:
         response = requests.get(DATA_URL)
@@ -305,6 +222,10 @@ elif page == "Areawise AQI":
                     st.markdown(recommendation)
 
         else:
+            st.write("No pollutant data available for this area.")
+    else:
+        st.write("No data available for the selected area.")
+
             st.write("No pollutant data available for this area.")
     else:
         st.write("No data available for the selected area.")
