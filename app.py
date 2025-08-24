@@ -51,7 +51,7 @@ def load_data():
     Caches the result to avoid reloading on every rerun.
     """
     # Replace this URL with the raw file URL from your Hugging Face dataset
-    DATA_URL = "https://huggingface.co/datasets/your_username/indian-aqi-data/raw/main/aqi.csv"
+    DATA_URL = "https://huggingface.co/datasets/manaspateltech/AQI/resolve/main/aqi.csv"
     
     try:
         response = requests.get(DATA_URL)
