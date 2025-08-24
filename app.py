@@ -225,7 +225,4 @@ elif page == "Areawise AQI":
             st.write("No pollutant data available for this area.")
     else:
         st.write("No data available for the selected area.")
-
-            st.write("No pollutant data available for this area.")
-    else:
-        st.write("No data available for the selected area.")
+       
