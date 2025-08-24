@@ -3,4 +3,3 @@ pandas
 plotly
 altair
 requests
-streamlit_extras
