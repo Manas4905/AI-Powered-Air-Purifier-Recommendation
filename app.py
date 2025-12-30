@@ -143,6 +143,8 @@ elif page == "Statewise AQI":
 
             st.altair_chart(chart, use_container_width=True)
 
+
+
             
             # --- AI-Based Recommendation Section ---
             st.subheader("AI-Powered Air Purifier Recommendation")
@@ -199,10 +201,12 @@ elif page == "Areawise AQI":
             pollutants_df.columns = ['Pollutant', 'Count']
 
             chart = alt.Chart(pollutants_df).mark_bar().encode(
-                x=alt.X('Count:Q', title="Count"),
-                y=alt.Y('Pollutant:N', sort='-x', title="Pollutant")
-            )
+                x=alt.X('Pollutant:N', sort='-y', title="Pollutant"),
+                y=alt.Y('Count:Q', title="Count")
+            ).configure_axisX(labelAngle=-45)
+
             st.altair_chart(chart, use_container_width=True)
+
 
             # --- AI-Based Recommendation Section ---
             st.subheader("AI-Powered Air Purifier Recommendation")
